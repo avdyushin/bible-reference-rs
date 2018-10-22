@@ -3,6 +3,7 @@ name = "bible-reference-rs"
 version = "0.1.0"
 authors = ["Grigory Avdyushin <avdyushin.g@gmail.com>"]
 readme = "README.md"
+license = "Apache-2.0"
 repository = "https://github.com/avdyushin/bible-reference-rs.git"
 description = "Extract Bible references from plain text"
 

@@ -1,0 +1,11 @@
+[package]
+name = "bible-reference-rs"
+version = "0.1.0"
+authors = ["Grigory Avdyushin <avdyushin.g@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/avdyushin/bible-reference-rs.git"
+description = "Extract Bible references from plain text"
+
+[dependencies]
+regex = "1"
+lazy_static = "1.1.0"

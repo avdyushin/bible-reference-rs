@@ -1,6 +1,8 @@
 # Bible Reference Parser
 Extract Bible references from plain text in Rust.
 
+[![Build Status](https://travis-ci.org/avdyushin/bible-reference-rs.svg)](https://travis-ci.org/avdyushin/bible-reference-rs)
+
 ## Usage
 
 ```rust

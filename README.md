@@ -2,6 +2,7 @@
 Extract Bible references from plain text in Rust.
 
 [![Build Status](https://travis-ci.org/avdyushin/bible-reference-rs.svg)](https://travis-ci.org/avdyushin/bible-reference-rs)
+[![Crates.io](https://img.shields.io/crates/v/bible-reference-rs.svg)](https://crates.io/crates/bible-reference-rs)
 
 ## Usage
 

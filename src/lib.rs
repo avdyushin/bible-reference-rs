@@ -56,7 +56,7 @@ static VERSES_LOCATION_PATTERN: &'static str = "(?P<Chapter>1?[0-9]?[0-9])\
 // Gen 1:1, 2
 // 3 King 1:3-4
 // II Ki. 3:12-14, 25
-static BIBLE_REFERENCE_PATTERN: &'static str = "(?P<Book>(([1234]|I{1,4})\\s*)?\\w+\\.?)\\s*\
+static BIBLE_REFERENCE_PATTERN: &'static str = "(?P<Book>(([1234]|I{1,4})\\s*)?\\pL+\\.?)\\s*\
                                                 (?P<Locations>(\
                                                 (?P<Chapter>1?[0-9]?[0-9])\
                                                 (-(?P<ChapterEnd>\\d+)|,\\s*(?P<ChapterNext>\\d+))*\
@@ -193,6 +193,15 @@ mod tests {
     }
 
     #[test]
+    fn test_parse_simple() {
+        let refs = parse("1Cor 1:1");
+        assert_eq!(refs.len(), 1);
+        assert_eq!(refs[0].book, "1Cor");
+        assert_eq!(refs[0].locations[0].chapters, [1]);
+        assert_eq!(refs[0].locations[0].verses, Some(vec![1]));
+    }
+
+    #[test]
     fn test_parse_singleline() {
         let refs = parse("II Ki. 3:12-14, 25");
 
@@ -200,6 +209,18 @@ mod tests {
         assert_eq!(refs[0].book, "II Ki.");
         assert_eq!(refs[0].locations[0].chapters, [3]);
         assert_eq!(refs[0].locations[0].verses, Some(vec![12, 13, 14, 25]));
+    }
+
+    #[test]
+    fn test_wrong_input_1() {
+        let refs = parse("123");
+        assert_eq!(refs.len(), 0);
+    }
+
+    #[test]
+    fn test_wrong_input_2() {
+        let refs = parse("1 234 3:4");
+        assert_eq!(refs.len(), 0);
     }
 
     #[test]

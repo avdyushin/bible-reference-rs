@@ -23,7 +23,7 @@ extern crate regex;
 use regex::Regex;
 
 /// Verse location representation
-#[derive(Hash, Eq, PartialEq, Debug)]
+#[derive(Hash, Eq, PartialEq, Debug, Clone)]
 pub struct VerseLocation {
     /// Chapters
     pub chapters: Vec<u8>,
@@ -32,7 +32,7 @@ pub struct VerseLocation {
 }
 
 /// Verse reference representation
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct BibleReference {
     /// Book name
     pub book: String,
@@ -165,6 +165,10 @@ mod tests {
         };
         assert_eq!(v.chapters, vec![1]);
         assert_eq!(v.verses, Some(vec![1, 2]));
+
+        let c = v.clone();
+        assert_eq!(c.chapters, vec![1]);
+        assert_eq!(c.verses, Some(vec![1, 2]));
     }
 
     #[test]
@@ -190,6 +194,11 @@ mod tests {
         assert_eq!(r.book, "Gen");
         assert_eq!(r.locations[0].chapters, [1]);
         assert_eq!(r.locations[0].verses, Some(vec![1, 2]));
+
+        let c = r.clone();
+        assert_eq!(c.book, "Gen");
+        assert_eq!(c.locations[0].chapters, [1]);
+        assert_eq!(c.locations[0].verses, Some(vec![1, 2]));
     }
 
     #[test]

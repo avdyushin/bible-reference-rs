@@ -56,7 +56,7 @@ static VERSES_LOCATION_PATTERN: &'static str = "(?P<Chapter>1?[0-9]?[0-9])\
 // Gen 1:1, 2
 // 3 King 1:3-4
 // II Ki. 3:12-14, 25
-static BIBLE_REFERENCE_PATTERN: &'static str = "(?P<Book>(([1234]|I{1,4})\\s*)?\\pL+\\.?)\\s*\
+static BIBLE_REFERENCE_PATTERN: &'static str = "(?P<Book>(([1234]|I{1,4})[\\t\\f\\pZ]*)?\\pL+\\.?)[\\t\\f\\pZ]+\
                                                 (?P<Locations>(\
                                                 (?P<Chapter>1?[0-9]?[0-9])\
                                                 (-(?P<ChapterEnd>\\d+)|,\\s*(?P<ChapterNext>\\d+))*\
@@ -235,12 +235,14 @@ mod tests {
     #[test]
     fn test_parse_multiline() {
         let refs = parse(
-            "Daily readings are Быт 1;\
-             Исх 1:2,4;\
-             1 Пет 5-8, 10.\
-             Also take a look in:
-             Rev 2,4;\
-             Jh 1:2-4,7\
+            "10:20 Daily readings are Быт 1;\n
+             1. Notes\n
+             2. Checkmarks\n
+             Исх 1:2,4;\n
+             1 Пет 5-8, 10.\n
+             Also take a look in:\n
+             Rev 2,4;\n
+             Jh 1:2-4,7\n
              Gen 1:1-2 2:2,5",
         );
 
